@@ -136,8 +136,16 @@ EMAIL_HOST_PASSWORD = 'vkchmmfusaimbjbd'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+<<<<<<< HEAD
+# # 增加邮箱登录
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'mysite.authentication.EmailAuthBackend',
+# ]
+=======
 # 增加邮箱登录
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     # 'mysite.authentication.EmailAuthBackend',
 ]
+>>>>>>> origin/master
