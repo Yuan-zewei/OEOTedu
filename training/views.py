@@ -13,3 +13,6 @@ def index(request):
 def post_list(request, id):
     cat = Post.objects.get(id=id)
     return render(request, 'training/post_list.html', {'cat': cat})
+
+
+
