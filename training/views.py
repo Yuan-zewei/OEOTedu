@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Profile, Post, Company
 from .forms import PostForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 
 
 # Create your views here.
@@ -42,3 +42,30 @@ def post_add(request):
         return HttpResponseRedirect("不能进行增加！！！")
 
 #
+def post_update(request, id):
+    user = request.user
+    # 找到该用户
+    post = Post.objects.get(id=id)
+    if user.profile.job == 'staff':
+        # 判断该工作
+        if request.method == "POST":
+            # 获取方式POST
+            form = PostForm(request.POST, instance=post)  # 找到该表单的内容
+            if form.is_valid():  # 是否合格
+                form.save()
+                return redirect("index")  # 返回主界面
+        else:
+            form = PostForm(instance=post)  # 否则实例化对象
+            return render(request, 'training/post_update.html', {'form': form})
+    else:
+        return HttpResponseRedirect("非职工身份不能修改公告！")
+
+# 删除——艾鹏
+def post_delete(request, id):
+    user = request.user
+    if user.profile.job == 'staff':
+        post = Post.objects.get(id=id)
+        post.delete()
+        return redirect('/')
+    else:
+        return HttpResponse('当前登录用户没有权限，请切换用户或者联系管理员.')
