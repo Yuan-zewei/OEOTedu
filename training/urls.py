@@ -3,7 +3,10 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('post_add/',views.post_add,name='post_add'),
-    # path('post/<int:id>/', views.post_list,name='post_list')
+<<<<<<< HEAD
+    path('post_add/',views.post_add,name='post_add')
+=======
+    path('post/<int:id>/', views.post_list,name='post_list')
+>>>>>>> origin/master
 
 ]
