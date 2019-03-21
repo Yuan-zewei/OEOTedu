@@ -14,9 +14,6 @@ def company(request):
     return render(request,'training/company.html',{'company':company})
 
 # 在列表里获得到作者、内容和标题
-def post_list(request, id):
-    cat = Post.objects.get(id=id)
-    return render(request, 'training/post_list.html', {'cat': cat})
 
 def post_detail(request,id):
     post=Post.objects.get(id=id)
