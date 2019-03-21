@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公告详情</title>
+</head>
+<body>
+<h3>{{ post.title }}</h3>
+<p>发布人：{{  post.auth}}</p>
+<p>{{ post.content }}</p>
+<hr>
+<p><a href="{% url 'post_update' post.id %}">修改公告</a></p>
+</body>
+</html>
