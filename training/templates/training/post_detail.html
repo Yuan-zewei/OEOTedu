@@ -7,8 +7,10 @@
 <body>
 <h3>{{ post.title }}</h3>
 <p>发布人：{{  post.auth}}</p>
+<p>发布时间：{{ post.publish|date:'Y-m-d' }}</p>
 <p>{{ post.content }}</p>
 <hr>
 <p><a href="{% url 'post_update' post.id %}">修改公告</a></p>
+<P><a href="{% url 'post_delete' post.id %}">删除公告</a></P>
 </body>
 </html>
