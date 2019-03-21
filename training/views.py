@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Post
+from .models import Profile, Post,Company
 from .forms import PostForm
 from django.http import HttpResponseRedirect
 
@@ -9,6 +9,9 @@ def index(request):
     posts=Post.objects.all()
     return render(request, 'training/index.html',{'posts':posts})
 
+def company(request):
+    company = Company.objects.all()
+    return render(request,'training/company.html',{'company':company})
 
 # 在列表里获得到作者、内容和标题
 def post_list(request, id):
