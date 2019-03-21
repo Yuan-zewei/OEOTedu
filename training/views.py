@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Profile, Post, Company
 from .forms import PostForm
-from django.http import HttpResponseRedirect,HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 
 
 # Create your views here.
@@ -60,6 +60,7 @@ def post_update(request, id):
             return render(request, 'training/post_update.html', {'form': form})
     else:
         return HttpResponseRedirect("非职工身份不能修改公告！")
+
 
 # 删除——艾鹏
 def post_delete(request, id):
