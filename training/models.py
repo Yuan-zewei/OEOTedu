@@ -39,7 +39,7 @@ class Department(models.Model):
         return self.name
 
 
-# 职位表
+# 职务
 class Position(models.Model):
     name = models.CharField(max_length=50)
     info = models.TextField()
@@ -48,9 +48,7 @@ class Position(models.Model):
         return self.name
 
 
-
 # 个人信息
-
 class Profile(models.Model):
     GENDER_CHOICES = (
         ('male', "男"),

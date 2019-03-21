@@ -5,7 +5,10 @@
     <title>培训公司管理系统</title>
 </head>
 <body>
-欢迎光临视察
+{% for post in posts %}
+    <a href="{% url 'post_list' post.id %}">{{ post.name }}</a>
+{% endfor %}
+
 
 <br>
 </body>
