@@ -1,14 +1,23 @@
 from django.contrib import admin
-from .models import Company
-
+from .models import Post,Profile,Position,Department,Company
 # Register your models here.
-"""
-公司后台admin,
-后台显示字段为公司名称'name'和公司简介'info'
-"""
 
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title','content')
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('name','job')
+
+@admin.register(Position)
+class PositionAdmin(admin.ModelAdmin):
+    list_display = ('name','info')
+
+@admin.register(Department)
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name','info','company')
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
-    # 后台显示字段name,info
-    list_display = ('name', 'info',)
+    list_display = ('name','info',)
