@@ -18,7 +18,9 @@ def post_add(request):
             #获取方式POST
             post_add = PostForm(request.POST)#找到该表单的内容
             if post_add.is_valid():#是否合格
-                post_add.save()#保存
+                new_post=post_add.save(commit=False)
+                new_post.auth=user.profile
+                new_post.save()
                 return redirect("index")#返回主界面
         else:
             post_add = PostForm()#否则实例化对象
