@@ -1,0 +1,21 @@
+{#文件：course_list.html#}
+{#作者：OEOTedu#}
+{#时间：2019-03-22#}
+{#版本：0.1#}
+{#email：1183525873@qq.com#}
+{#联系方式：QQ：1183525873 电话：18931187921#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for cours in courses %}
+    <p>{{ cours.name }}</p>
+    <p>开始时间:{{ cours.starttime }}</p>
+    <p>结束时间:{{ cours.endtime }}</p>
+{% endfor %}
+
+</body>
+</html>
