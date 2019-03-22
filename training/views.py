@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Course
 from .forms import CourseForm
 from datetime import datetime
+from .models import Profile, Post, Company
 from django.http import HttpResponseRedirect, HttpResponse
 
 
