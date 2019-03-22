@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Profile, Post, Company,Department
+from .models import Profile, Post, Company, Note
 from .forms import PostForm
 from django.http import HttpResponseRedirect, HttpResponse
+from datetime import date, timedelta
 
 
 # Create your views here.
@@ -113,3 +115,18 @@ def class_detail(request, class_id):
     name = class_details.name
     info = class_details.info
     return render(request, 'training/department/class_detail.html', {'class_details': class_details, 'name': name, 'info': info})
+
+
+# 显示值班信息 王凯杰,罗胜璠
+def duty_list(request):
+    # 找到今天是星期几
+    today = date.today().weekday() + 1
+    # 找到today这整个星期的星期1
+    week_s = date.today() - timedelta(days=today-1)
+    # 找到today这个星期的周末
+    week_end = date.today() + timedelta(7 - today)
+
+    # 找到日期大于等于这个星期的日期在找到结束日期小于这周最周一天的
+    duties = Note.objects.filter(starttime__gt=week_s).filter(endtime__lte=week_end)
+
+    return render(request, 'training/duty_list.html', {'duties': duties})
