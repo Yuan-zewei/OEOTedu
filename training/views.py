@@ -226,3 +226,15 @@ def course_delete_stu(request, id):
     course = Course.objects.get(id=id)
     course.students.remove(request.user.profile)
     return redirect('courses_list')
+
+
+#最新课程（可报名）--王凯杰
+def new_course(request):
+    new_courses=Course.objects.all().order_by('starttime')
+    course_list=[]
+    for course in new_courses:
+        c=course.students.count()
+        if c<course.most:
+            course_list.append(course)
+
+    return render(request,'training/new_courses.html',{'course_list':course_list})

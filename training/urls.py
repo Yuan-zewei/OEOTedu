@@ -26,8 +26,10 @@ urlpatterns = [
     path('duty_list/', views.duty_list, name='duty_list'),
     # 值日表--小罗小王
     path('stu_note/', views.stu_note, name='stu_note'),
-
     path('duty_list/',views.duty_list,name='duty_list'),
+
     path('create_course/', views.course_add, name='create_course'),
     path('course_delete/<int:id>/', views.course_delete, name='course_delete'),
+    #最新课程---王凯杰
+    path('new/courses/',views.new_course,name='new_course'),
 ]
