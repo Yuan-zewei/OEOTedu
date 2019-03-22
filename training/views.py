@@ -157,21 +157,19 @@ def course_delete_stu(request, id):
 
 
 # 报名课程
-def course_apply(request):
+def course_apply(request, id):
     courses = Course.objects.all().filter(students__name=request.user.profile.name)
-    course_form = CourseForm(data=request.POST)
-    for course in courses:
+    course = Course.objects.get(id=id)
+    for course1 in courses:
         # 拿到课程的开始时间和结束时间
         time_start = course.starttime
         time_end = course.endtime
         # 得到修改后的课程的开始时间和结束时间
-        start = course_form.cleaned_data['starttime']
-        end = course_form.cleaned_data['endtime']
+        start = course1.starttime
+        end = course1.endtime
         # 符合课程时间的条件为：开始时间大于结束时间，结束时间小于开始时间
         if start >= time_end or end <= time_start:
-            course_form.save()
-            return HttpResponseRedirect('/courses_list/')
+            course.students.add(request.user.profile)
+            return render(request, 'training/course_apply.html')
         else:
             return HttpResponse('时间段冲突，请重新修改')
-
-    return render(request, 'training/course_apply.html', {'course_form': course_form})
