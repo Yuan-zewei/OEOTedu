@@ -4,8 +4,10 @@ from .forms import PostForm
 from .models import Course, Note
 from .forms import CourseForm, PostForm
 from datetime import datetime
+from .models import Profile, Post, Company, Department, Note
+from .forms import PostForm, NoteForm
 from django.http import HttpResponseRedirect, HttpResponse
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 
 # Create your views here.
@@ -141,6 +143,7 @@ def post_delete(request, id):
         return HttpResponse('当前登录用户没有权限，请切换用户或者联系管理员.')
 
 
+
 # 班级人员列表——艾鹏
 def profile_list(request, id):
     department = Department.objects.get(id=id)
@@ -153,6 +156,9 @@ def profile_list(request, id):
 def section_list(request):
     look = Department.objects.filter(name__contains="部")
     return render(request, 'training/department/look_section.html', {'look': look})
+
+
+
 
 
 # 部门下的人员__斌
@@ -189,6 +195,19 @@ def duty_list(request):
     duties = Note.objects.filter(starttime__gt=week_s).filter(endtime__lte=week_end)
 
     return render(request, 'training/duty_list.html', {'duties': duties})
+
+
+# 值日表--小罗-小王
+def stu_note(request):
+    # 找到今天是星期几
+    today = date.today().weekday() + 1
+    # 找到today这整个星期的星期1
+    week_s = date.today() - timedelta(days=today - 1)
+    # 找到today这个星期的周末
+    week_end = date.today() + timedelta(7 - today)
+    # 找到日期大于等于这个星期的日期在找到结束日期小于这周最周一天的
+    stu_note = Note.objects.filter(starttime__gte=week_s).filter(endtime__lte=week_end)
+    return render(request, 'training/stu_note.html', {'stu_note': stu_note})
 
 
 # 判断职务,分别进入页面__赵猛彤
