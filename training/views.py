@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Post, Company
+from .models import Profile, Post, Company, Department
 from .forms import PostForm
 from django.http import HttpResponseRedirect, HttpResponse
 
 
 # Create your views here.
+# 查找到作者
 def index(request):
     posts = Post.objects.all()
     return render(request, 'training/index.html', {'posts': posts})
@@ -71,3 +72,22 @@ def post_delete(request, id):
         return redirect('/')
     else:
         return HttpResponse('当前登录用户没有权限，请切换用户或者联系管理员.')
+
+
+# 查看部门__斌
+def section_list(request):
+    look = Department.objects.filter(name__contains="部")
+    return render(request, 'training/look_section.html', {'look': look})
+
+
+# 查看班级__斌
+def section_class(request):
+    cla = Department.objects.filter(name__contains='班')
+    return render(request, 'training/section_class.html',{'cla':cla})
+
+
+# 部门下的人员__斌
+def section_details(request, id):
+    sec = Department.objects.get(id=id)
+    # cla =
+    return render(request, 'training/section_details.html', {'sec': sec})
