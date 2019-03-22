@@ -116,3 +116,14 @@ def course_list(request):
         # 显示该学生报名的课程
         courses = Course.objects.all().filter(students__name=request.user.profile.name)
     return render(request, 'training/courses_list.html', {'courses': courses})
+
+
+def all_list(request,id):
+    list=Course.objects.get(id=id)
+    return render(request,'training/all_list.html',{'list':list})
+
+
+def all_student(request):
+    student = Profile.objects.all()
+    return render(request, 'training/all_student.html', {'student': student})
+
