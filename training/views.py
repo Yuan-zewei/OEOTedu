@@ -16,7 +16,7 @@ def index(request):
 # 课程列表
 def courses_list(request):
     courses = Course.objects.all()
-    return render(request, 'training/course_list.html', {'courses': courses})
+    return render(request, 'training/courses_list.html', {'courses': courses})
 
 
 # 课程添加功能__赵昊蓁
@@ -140,10 +140,17 @@ def post_delete(request, id):
 
 # 判断职务,分别进入页面__赵猛彤
 def course_list(request):
+    all_courses = Course.objects.all()
     if request.user.profile.job == 'staff':
         # 显示该教师发布课程
         courses = Course.objects.all().filter(teacher__name=request.user.profile.name)
     else:
         # 显示该学生报名的课程
         courses = Course.objects.all().filter(students__name=request.user.profile.name)
-    return render(request, 'training/courses_list.html', {'courses': courses})
+    return render(request, 'training/courses_list.html', {'courses': courses, 'all_courses': all_courses})
+
+
+def course_delete_stu(request, id):
+    course = Course.objects.get(id=id)
+    course.students.remove(request.user.profile)
+    return redirect('courses_list')

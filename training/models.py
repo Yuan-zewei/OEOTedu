@@ -49,7 +49,6 @@ class Position(models.Model):
         return self.name
 
 
-
 # 个人信息
 
 class Profile(models.Model):
@@ -130,3 +129,6 @@ class Logging(models.Model):
     logout = models.DateTimeField()
     user = models.ForeignKey(Profile, on_delete=models.CASCADE,
                              related_name='loggings')
+
+
+
