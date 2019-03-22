@@ -1,8 +1,10 @@
 from django.contrib import admin
 from .models import Post, Profile, Position, Department, Company, Note, Duty
-
-
+from .models import Post,Profile,Position,Department,Company,Course
 # Register your models here.
+@admin.register(Course)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['name', 'info', 'most', 'starttime', 'endtime', 'teacher']
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -37,8 +39,3 @@ class NoteAdmin(admin.ModelAdmin):
 @admin.register(Duty)
 class DutyAdmin(admin.ModelAdmin):
     list_display = ('name',)
-
-
-
-
-

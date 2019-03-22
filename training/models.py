@@ -6,6 +6,7 @@
 email：40063539@qq.com
 联系方式：QQ：40063539 电话：15903111958
 """
+
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -46,13 +47,6 @@ class Position(models.Model):
 
     def __str__(self):
         return self.name
-
-
-# 位置
-
-# class Position(models.Model):
-#     name = models.CharField(max_length=50)
-#     info = models.TextField()
 
 
 # 个人信息
@@ -117,7 +111,7 @@ class Note(models.Model):
     endtime = models.DateTimeField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE,
                                 related_name='notes')
-    dutys = models.ForeignKey(Duty,on_delete=models.CASCADE, related_name='notes')
+    dutys = models.ForeignKey(Duty, on_delete=models.CASCADE, related_name='notes')
 
 
 # 文章
@@ -138,3 +132,6 @@ class Logging(models.Model):
     logout = models.DateTimeField()
     user = models.ForeignKey(Profile, on_delete=models.CASCADE,
                              related_name='loggings')
+
+
+
