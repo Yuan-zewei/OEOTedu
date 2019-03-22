@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 
 # Create your views here.
+# 查找到作者
 def index(request):
     posts = Post.objects.all()
     depas = Department.objects.filter()
@@ -74,6 +75,7 @@ def post_delete(request, id):
         return HttpResponse('当前登录用户没有权限，请切换用户或者联系管理员.')
 
 
+
 # 班级人员列表——艾鹏
 def profile_list(request, id):
     department = Department.objects.get(id=id)
@@ -85,3 +87,20 @@ def profile_list(request, id):
 # def ceshi(request):
 #     department = Department.objects.filter(name__contains='班')
 #     return render(request, 'training/ceshi.html', {'department': department})
+
+# 查看部门__斌
+def section_list(request):
+    look = Department.objects.filter(name__contains="部")
+    return render(request, 'training/look_section.html', {'look': look})
+
+
+# 查看班级__斌
+def section_class(request):
+    cla = Department.objects.filter(name__contains='班')
+    return render(request, 'training/section_class.html',{'cla':cla})
+
+
+# 部门下的人员__斌
+def section_details(request, id):
+    sec = Department.objects.get(id=id)
+    return render(request, 'training/section_details.html', {'sec': sec})

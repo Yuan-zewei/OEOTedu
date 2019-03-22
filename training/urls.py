@@ -18,4 +18,10 @@ urlpatterns = [
 
     #测试表——艾鹏
     # path('aa/',views.ceshi,name='ceshi'),
+
+    path('post/section_list/', views.section_list, name='section_list'),
+    path('post/class/', views.section_class, name='section_class'),
+    path('post/section_details/<int:id>/',views.section_details,name='section_details'),
+
+
 ]
