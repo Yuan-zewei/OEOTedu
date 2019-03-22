@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Post, Company
+from .models import Profile, Post, Company, Note
 from .forms import PostForm
 from django.http import HttpResponseRedirect, HttpResponse
-
+from datetime import date
 
 # Create your views here.
 def index(request):
@@ -71,3 +71,14 @@ def post_delete(request, id):
         return redirect('/')
     else:
         return HttpResponse('当前登录用户没有权限，请切换用户或者联系管理员.')
+
+
+# 显示值班信息 王凯杰,罗胜璠
+def duty_list(request):
+    today = date.today().day
+    week_day = date.today().weekday()
+    duties = Note.objects.filter(dutys__name__contains='值班').filter(endtime__day__gte=today-week_day)
+    return render(request, 'training/duty_list.html', {'duties': duties})
+
+
+
