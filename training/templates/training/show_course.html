@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程</title>
+</head>
+<body>
+{% for cour in course  %}
+    <h3><a href="{% url 'show_list' cour.id %}">{{ cour.name }}</a></h3>
+{#    #显示所有的课程#}
+    <br>
+
+{% endfor %}
+
+
+</body>
+</html>
