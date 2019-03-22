@@ -22,6 +22,7 @@ def courses_list(request):
 # 课程修改功能
 def course_edit(request, id):
     course = Course.objects.get(id=id)
+    # 该老师的所有课程
     courses = Course.objects.all().filter(teacher__name=request.user.profile.name)
     if request.method == 'POST':
         course_form = CourseForm(data=request.POST, instance=course)
