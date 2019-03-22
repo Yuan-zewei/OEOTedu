@@ -1,6 +1,11 @@
 from django.contrib import admin
-from .models import Post,Profile,Position,Department,Company
+from .models import Course, Profile, Position, Department, Company,Post
+
+
 # Register your models here.
+@admin.register(Course)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['name', 'info', 'most', 'starttime', 'endtime', 'teacher']
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):

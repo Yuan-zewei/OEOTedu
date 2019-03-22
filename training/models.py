@@ -6,6 +6,7 @@
 email：40063539@qq.com
 联系方式：QQ：40063539 电话：15903111958
 """
+
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -47,12 +48,6 @@ class Position(models.Model):
     def __str__(self):
         return self.name
 
-
-# 位置
-
-# class Position(models.Model):
-#     name = models.CharField(max_length=50)
-#     info = models.TextField()
 
 
 # 个人信息
