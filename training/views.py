@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Course
-from .forms import CourseForm
+from .forms import CourseForm, PostForm
 from datetime import datetime
 from .models import Profile, Post, Company
 from django.http import HttpResponseRedirect, HttpResponse
@@ -9,7 +9,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 # Create your views here.
 # 主页
 def index(request):
-    return render(request, 'training/index.html')
+    posts = Post.objects.all()
+    return render(request, 'training/index.html', {'posts': posts})
 
 
 # 课程列表
