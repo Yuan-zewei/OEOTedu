@@ -9,21 +9,16 @@
 欢迎光临:{{ user }}
 <h3>奇酷学院公告</h3>
 <a href="{% url 'company' %}">公司详情</a>
-<<<<<<< HEAD
 {#{% for post in posts %}#}
 {#    <p><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></p>#}
 {#{% endfor %}#}
 <hr>
 <a href="{% url 'post_add' %}">添加公告</a>
 <a href="{% url 'class_list'  %}">班级</a>
-=======
 {% for post in posts %}
     <p><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></p>
 {% endfor %}
 <hr>
-<a href="{% url 'post_add' %}">添加公告</a>
->>>>>>> remotes/origin/master
 
-<br>
 </body>
 </html>
