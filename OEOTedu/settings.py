@@ -123,9 +123,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # 用户登录配置
 # LOGIN_REDIRECT_URL = 'dashboard'
-LOGIN_REDIRECT_URL = 'index'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = 'index'
+# LOGIN_URL = 'login'
+# LOGOUT_URL = 'logout'
 
 # 配置邮件发送
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -137,7 +137,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # 增加邮箱登录
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'mysite.authentication.EmailAuthBackend',
-]
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'mysite.authentication.EmailAuthBackend',
+# ]
