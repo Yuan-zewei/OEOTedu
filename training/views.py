@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Profile, Post, Company, Note
 from .forms import PostForm
 from django.http import HttpResponseRedirect, HttpResponse
-from datetime import date
+from datetime import date, timedelta
+
 
 # Create your views here.
 def index(request):
@@ -75,10 +76,14 @@ def post_delete(request, id):
 
 # 显示值班信息 王凯杰,罗胜璠
 def duty_list(request):
-    today = date.today().day
-    week_day = date.today().weekday()
-    duties = Note.objects.filter(dutys__name__contains='值班').filter(endtime__day__gte=today-week_day)
+    # 找到今天是星期几
+    today = date.today().weekday() + 1
+    # 找到today这整个星期的星期1
+    week_s = date.today() - timedelta(days=today-1)
+    # 找到today这个星期的周末
+    week_end = date.today() + timedelta(7 - today)
+
+    # 找到日期大于等于这个星期的日期在找到结束日期小于这周最周一天的
+    duties = Note.objects.filter(starttime__gt=week_s).filter(endtime__lte=week_end)
+
     return render(request, 'training/duty_list.html', {'duties': duties})
-
-
-
