@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>部门列表</title>
+</head>
+<body>
+{% for foo in look %}
+    <a href="{% url 'section_details' foo.id %}"><h3>{{ foo.name }}</h3></a>
+    <br>
+{% endfor %}
+<br>
+
+</body>
+</html>
