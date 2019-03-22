@@ -48,11 +48,11 @@ class Position(models.Model):
         return self.name
 
 
-# 位置
-
-class Position(models.Model):
-    name = models.CharField(max_length=50)
-    info = models.TextField()
+# # 位置
+#
+# class Position(models.Model):
+#     name = models.CharField(max_length=50)
+#     info = models.TextField()
 
 
 # 个人信息
@@ -99,8 +99,8 @@ class Course(models.Model):
 
     teacher = models.ForeignKey(Profile, on_delete=models.CASCADE,
                                 related_name='course')
-    students = models.ForeignKey(Profile, on_delete=models.CASCADE,
-                                 related_name='courses')
+    students = models.ManyToManyField(Profile,
+                                      related_name='courses', blank=True)
 
 
 # 考勤内容
