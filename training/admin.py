@@ -6,23 +6,19 @@ from .models import Post, Profile, Position, Department, Company, Note, Duty
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'content')
-
+    list_display = ('title','content')
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('name', 'job')
-
+    list_display = ('name','job')
 
 @admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'info')
-
+    list_display = ('name','info')
 
 @admin.register(Department)
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'info', 'company')
-
+    list_display = ('name','info','company')
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
