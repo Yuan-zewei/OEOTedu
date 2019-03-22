@@ -6,8 +6,10 @@
 </head>
 <body>
 {% for foo in look %}
-    <a href="{% url 'section_details' foo.id %}">{{ foo.name }}</a>
+    <a href="{% url 'section_details' foo.id %}"><h3>{{ foo.name }}</h3></a>
+    <br>
 {% endfor %}
+<br>
 
 </body>
 </html>
