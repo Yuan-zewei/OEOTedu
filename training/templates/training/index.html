@@ -8,11 +8,16 @@
 
 欢迎光临:{{ user }}
 <h3>奇酷学院公告</h3>
+<a href="{% url 'company' %}">公司详情</a>
 {% for post in posts %}
     <p><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></p>
 {% endfor %}
 <hr>
 <a href="{% url 'post_add' %}">添加公告</a>
+
 <br>
+<a href="{% url 'section_list' %}">查看部门</a>
+<br>
+<a href="{% url 'section_class' %}">查看班级</a>
 </body>
 </html>
