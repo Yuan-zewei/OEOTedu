@@ -99,13 +99,16 @@ class Course(models.Model):
 
     teacher = models.ForeignKey(Profile, on_delete=models.CASCADE,
                                 related_name='course')
-    students = models.ManyToManyField(Profile,related_name='courses',blank=True)
+    students = models.ManyToManyField(Profile, related_name='courses', blank=True)
 
 
 # 考勤内容
 
 class Duty(models.Model):
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 
 # 考勤信息
@@ -114,7 +117,7 @@ class Note(models.Model):
     endtime = models.DateTimeField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE,
                                 related_name='notes')
-    dutys = models.ForeignKey(Duty,on_delete=models.CASCADE, related_name='notes')
+    dutys = models.ForeignKey(Duty, on_delete=models.CASCADE, related_name='notes')
 
 
 # 文章
