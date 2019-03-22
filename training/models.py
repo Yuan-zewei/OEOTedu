@@ -117,7 +117,7 @@ class Note(models.Model):
     endtime = models.DateTimeField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE,
                                 related_name='notes')
-    dutys = models.ForeignKey(Duty, on_delete=models.CASCADE, related_name='notes')
+    dutys = models.ForeignKey(Duty,on_delete=models.CASCADE, related_name='notes')
 
 
 # 文章

@@ -31,6 +31,18 @@ class CompanyAdmin(admin.ModelAdmin):
 
 @admin.register(Note)
 class NoteAdmin(admin.ModelAdmin):
+    list_display = ('starttime', 'endtime', 'profile')
+
+
+@admin.register(Duty)
+class DutyAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+    list_display = ('name', 'info',)
+
+
+@admin.register(Note)
+class NoteAdmin(admin.ModelAdmin):
     list_display = ('starttime', 'endtime', 'profile',)
 
 

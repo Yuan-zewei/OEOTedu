@@ -1,3 +1,9 @@
+"""
+20190321
+删除
+艾鹏
+"""
+from .models import Post
 from .models import Post, Note
 from django.forms import ModelForm
 

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>部门人员</title>
+</head>
+<body>
+<h3><-{{ sec.name }}-></h3>
+<br>
+{% for foo in sec.depart_emp.all %}
+    <p>{{ foo.name }}</p>
+        <br>
+{% endfor %}
+
+</body>
+</html>
