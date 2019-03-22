@@ -105,3 +105,14 @@ def post_delete(request, id):
         return redirect('/')
     else:
         return HttpResponse('当前登录用户没有权限，请切换用户或者联系管理员.')
+
+
+# 判断职务,分别进入页面__赵猛彤
+def course_list(request):
+    if request.user.profile.job == 'staff':
+        # 显示该教师发布课程
+        courses = Course.objects.all().filter(teacher__name=request.user.profile.name)
+    else:
+        # 显示该学生报名的课程
+        courses = Course.objects.all().filter(students__name=request.user.profile.name)
+    return render(request, 'training/courses_list.html', {'courses': courses})
