@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course, Profile, Position, Department, Company
+from .models import Course, Profile, Position, Department, Company,Post
 
 
 # Register your models here.
@@ -7,27 +7,22 @@ from .models import Course, Profile, Position, Department, Company
 class PostAdmin(admin.ModelAdmin):
     list_display = ['name', 'info', 'most', 'starttime', 'endtime', 'teacher']
 
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title','content')
 
 @admin.register(Profile)
-class Profile(admin.ModelAdmin):
-    list_display = ['name']
-
-
-# @admin.register(Course)
-
-# class Course(admin.ModelAdmin):
-#     list_display = ['name']
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('name','job')
 
 @admin.register(Position)
-class Position(admin.ModelAdmin):
-    list_display = ['name', 'info']
-
+class PositionAdmin(admin.ModelAdmin):
+    list_display = ('name','info')
 
 @admin.register(Department)
-class Department(admin.ModelAdmin):
-    list_display = ['company']
-
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name','info','company')
 
 @admin.register(Company)
-class Company(admin.ModelAdmin):
-    list_display = ['name', 'info']
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name','info',)

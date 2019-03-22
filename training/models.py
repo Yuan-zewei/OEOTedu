@@ -9,6 +9,7 @@ email：40063539@qq.com
 
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 
 
 # Create your models here.
@@ -47,12 +48,6 @@ class Position(models.Model):
     def __str__(self):
         return self.name
 
-
-# # 位置
-#
-# class Position(models.Model):
-#     name = models.CharField(max_length=50)
-#     info = models.TextField()
 
 
 # 个人信息
@@ -99,8 +94,7 @@ class Course(models.Model):
 
     teacher = models.ForeignKey(Profile, on_delete=models.CASCADE,
                                 related_name='course')
-    students = models.ManyToManyField(Profile,
-                                      related_name='courses', blank=True)
+    students = models.ManyToManyField(Profile, related_name='courses', blank=True)
 
 
 # 考勤内容
@@ -109,13 +103,13 @@ class Duty(models.Model):
     name = models.CharField(max_length=50)
 
 
-# 日志
+# 考勤信息
 class Note(models.Model):
     starttime = models.DateTimeField()
     endtime = models.DateTimeField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE,
                                 related_name='notes')
-    dutys = models.ManyToManyField(Duty, related_name='notes')
+    dutys = models.ForeignKey(Duty, on_delete=models.CASCADE, related_name='notes')
 
 
 # 文章
@@ -124,6 +118,7 @@ class Post(models.Model):
     content = models.TextField()
     auth = models.ForeignKey(Profile, on_delete=models.CASCADE,
                              related_name='posts')
+    publish = models.DateTimeField(default=timezone.now())
 
     def __str__(self):
         return self.title

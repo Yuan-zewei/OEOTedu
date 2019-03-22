@@ -1,12 +1,15 @@
 from django.forms import ModelForm
-from .models import Course
-
-'''
-添加文章时显示的字段
-'''
+from .models import Course, Post
 
 
-class CourseCreate(ModelForm):
+# 课程修改的form模板
+class CourseForm(ModelForm):
     class Meta:
         model = Course
-        fields = ('name', 'info', 'most', 'starttime', 'endtime', 'teacher',)
+        fields = ('name', 'info', 'most', 'starttime', 'endtime', 'teacher')
+
+
+class PostForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'content')
