@@ -6,7 +6,6 @@
 email：40063539@qq.com
 联系方式：QQ：40063539 电话：15903111958
 """
-
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -100,8 +99,7 @@ class Course(models.Model):
 
     teacher = models.ForeignKey(Profile, on_delete=models.CASCADE,
                                 related_name='course')
-    students = models.ForeignKey(Profile, on_delete=models.CASCADE,
-                                 related_name='courses')
+    students = models.ManyToManyField(Profile,related_name='courses',blank=True)
 
 
 # 考勤内容
@@ -110,13 +108,13 @@ class Duty(models.Model):
     name = models.CharField(max_length=50)
 
 
-# 日志
+# 考勤信息
 class Note(models.Model):
     starttime = models.DateTimeField()
     endtime = models.DateTimeField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE,
                                 related_name='notes')
-    dutys = models.ManyToManyField(Duty, related_name='notes')
+    dutys = models.ForeignKey(Duty,on_delete=models.CASCADE, related_name='notes')
 
 
 # 文章
