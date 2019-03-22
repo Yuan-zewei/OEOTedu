@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Post, Company
+from .models import Profile, Post, Company, Department
 from .forms import PostForm
 from django.http import HttpResponseRedirect, HttpResponse
 
@@ -7,7 +7,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 # Create your views here.
 def index(request):
     posts = Post.objects.all()
-    return render(request, 'training/index.html', {'posts': posts})
+    depas = Department.objects.filter()
+    return render(request, 'training/index.html', {'posts': posts, 'depas': depas})
 
 
 def company(request):
@@ -71,3 +72,16 @@ def post_delete(request, id):
         return redirect('/')
     else:
         return HttpResponse('当前登录用户没有权限，请切换用户或者联系管理员.')
+
+
+# 班级人员列表——艾鹏
+def profile_list(request, id):
+    department = Department.objects.get(id=id)
+    profiles = department.depart_emp.all()
+    return render(request, 'training/department_detail.html', {'department': department, 'profiles': profiles})
+
+
+#班级测试，艾鹏
+# def ceshi(request):
+#     department = Department.objects.filter(name__contains='班')
+#     return render(request, 'training/ceshi.html', {'department': department})
