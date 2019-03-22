@@ -101,7 +101,8 @@ class Course(models.Model):
 class Duty(models.Model):
     name = models.CharField(max_length=50)
 
-
+    def __str__(self):
+        return self.name
 # 考勤信息
 class Note(models.Model):
     starttime = models.DateTimeField()

@@ -1,0 +1,20 @@
+{#2019-03-22#}
+{#增加班级人员表——艾鹏#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>班级人员</title>
+</head>
+<body>
+
+
+<h3>{{ department.name }}</h3>
+<hr>
+{% for profile in profiles %}
+    {{ profile.name }}
+{% endfor %}
+
+</body>
+</html>

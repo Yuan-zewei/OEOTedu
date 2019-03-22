@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>值班表</title>
+</head>
+<body>
+{% for duty in duties %}
+    <p>开始时间：{{ duty.starttime|date:'Y-m-d H:i:s' }}</p>
+    <p>人员：{{ duty.profile.name }}</p>
+    <p>考勤内容：{{ duty.dutys }}</p>
+    <hr>
+{% endfor %}
+
+</body>
+</html>

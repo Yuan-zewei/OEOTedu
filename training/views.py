@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect
-from .models import Course
+from .models import Profile, Post, Company, Department
+from .forms import PostForm
+from .models import Course, Note
 from .forms import CourseForm, PostForm
 from datetime import datetime
-from .models import Profile, Post, Company
 from django.http import HttpResponseRedirect, HttpResponse
+from datetime import date, timedelta
 
 
 # Create your views here.
 # 主页
 def index(request):
     posts = Post.objects.all()
-    return render(request, 'training/index.html', {'posts': posts})
+    depas = Department.objects.filter()
+    return render(request, 'training/index.html', {'posts': posts, 'depas': depas})
 
 
 # 课程列表
@@ -84,7 +87,7 @@ def company(request):
 
 def post_detail(request, id):
     post = Post.objects.get(id=id)
-    return render(request, 'training/post_detail.html', {'post': post})
+    return render(request, 'training/post/post_detail.html', {'post': post})
 
 
 def post_add(request):
@@ -102,7 +105,7 @@ def post_add(request):
                 return redirect("index")  # 返回主界面
         else:
             post_add = PostForm()  # 否则实例化对象
-            return render(request, 'training/post_add.html', {'post_add': post_add})
+            return render(request, 'training/post/post_add.html', {'post_add': post_add})
     else:
         return HttpResponseRedirect("不能进行增加！！！")
 
@@ -122,7 +125,7 @@ def post_update(request, id):
                 return redirect("index")  # 返回主界面
         else:
             form = PostForm(instance=post)  # 否则实例化对象
-            return render(request, 'training/post_update.html', {'form': form})
+            return render(request, 'training/post/post_update.html', {'form': form})
     else:
         return HttpResponseRedirect("非职工身份不能修改公告！")
 
@@ -136,6 +139,56 @@ def post_delete(request, id):
         return redirect('/')
     else:
         return HttpResponse('当前登录用户没有权限，请切换用户或者联系管理员.')
+
+
+# 班级人员列表——艾鹏
+def profile_list(request, id):
+    department = Department.objects.get(id=id)
+    profiles = department.depart_emp.all()
+    return render(request, 'training/department/department_detail.html',
+                  {'department': department, 'profiles': profiles})
+
+
+# 查看部门__斌
+def section_list(request):
+    look = Department.objects.filter(name__contains="部")
+    return render(request, 'training/department/look_section.html', {'look': look})
+
+
+# 部门下的人员__斌
+def section_details(request, id):
+    sec = Department.objects.get(id=id)
+    return render(request, 'training/department/section_details.html', {'sec': sec})
+
+
+# 班级列表
+def class_list(request):
+    department = Department.objects.filter(name__contains="班")
+    return render(request, 'training/department/class_list.html', {'department': department})
+
+
+# 班级详细介绍
+def class_detail(request, class_id):
+    class_details = Department.objects.get(id=class_id)
+    name = class_details.name
+    info = class_details.info
+    return render(request, 'training/department/class_detail.html',
+                  {'class_details': class_details, 'name': name, 'info': info})
+
+
+# 显示值班信息 王凯杰,罗胜璠
+def duty_list(request):
+    # 找到今天是星期几
+    today = date.today().weekday() + 1
+    # 找到today这整个星期的星期1
+    week_s = date.today() - timedelta(days=today - 1)
+    # 找到today这个星期的周末
+    week_end = date.today() + timedelta(7 - today)
+
+    # 找到日期大于等于这个星期的日期在找到结束日期小于这周最周一天的
+    duties = Note.objects.filter(starttime__gt=week_s).filter(endtime__lte=week_end)
+
+    return render(request, 'training/duty_list.html', {'duties': duties})
 
 
 # 判断职务,分别进入页面__赵猛彤
