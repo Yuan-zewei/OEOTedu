@@ -8,7 +8,7 @@ urlpatterns = [
     path('post/update/<int:id>/', views.post_update, name='post_update'),
     path('post_delete/<int:id>/', views.post_delete, name='post_delete'),
     path('company/', views.company, name='company'),
-    # 班级详细介绍----王帅
+    #     # 班级详细介绍----王帅
     path('class_list/', views.class_list, name='class_list'),   # 班级列表
     path('class_detail/<int:class_id>/', views.class_detail, name='class_detail'),  # 班级详情
 
