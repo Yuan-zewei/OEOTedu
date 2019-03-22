@@ -20,7 +20,7 @@
 {% else %}
     {% for course in courses %}
         {{ course.name }}
-        <a href=".">报名</a>
+        <a href="{% url 'course_apply' course.id %}">报名</a>
         <a href="{% url 'course_delete_stu' course.id %}">取消</a>
         <p>开始时间：{{ course.starttime }}</p>
         <p>结束时间：{{ course.endtime }}</p>
