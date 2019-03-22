@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Post, Company, Department
+from .models import Profile, Post, Company,Department
 from .forms import PostForm
 from django.http import HttpResponseRedirect, HttpResponse
 
 
 # Create your views here.
-# 查找到作者
 def index(request):
     posts = Post.objects.all()
     return render(request, 'training/index.html', {'posts': posts})
@@ -79,14 +78,24 @@ def section_list(request):
     return render(request, 'training/look_section.html', {'look': look})
 
 
-# 查看班级__斌
-def section_class(request):
-    cla = Department.objects.filter(name__contains='班')
-    return render(request, 'training/section_class.html',{'cla':cla})
+
 
 
 # 部门下的人员__斌
 def section_details(request, id):
     sec = Department.objects.get(id=id)
-    # cla =
     return render(request, 'training/section_details.html', {'sec': sec})
+
+
+# 班级列表
+def class_list(request):
+    department = Department.objects.filter(name__contains="班")
+    return render(request, 'training/class_list.html', {'department': department})
+
+
+# 班级详细介绍
+def class_detail(request, class_id):
+    class_details = Department.objects.get(id=class_id)
+    name = class_details.name
+    info = class_details.info
+    return render(request, 'training/class_detail.html', {'class_details': class_details, 'name': name, 'info': info})
