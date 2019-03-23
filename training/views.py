@@ -30,6 +30,14 @@ def course_add(request):
     courses = Course.objects.all().filter(teacher__name=request.user.profile.name)
     if request.method == 'POST':
         course_form = CourseForm(data=request.POST)
+        if course_form.is_valid() and not courses:
+            start = course_form.cleaned_data['starttime']
+            end = course_form.cleaned_data['endtime']
+            if start < end:
+                course_form.save()
+                return HttpResponseRedirect('/courses_list/')
+            else:
+                return HttpResponseRedirect('/course_failed/')
         if course_form.is_valid() and courses:
             for course in courses:
                 # 拿到课程的开始时间和结束时间
@@ -69,7 +77,7 @@ def course_edit(request, id):
                     course_form.save()
                     return HttpResponseRedirect('/courses_list/')
                 else:
-                    return HttpResponse('时间段冲突，请重新修改')
+                    return HttpResponseRedirect('/course_failed/')
     else:
         course_form = CourseForm(instance=course)
     return render(request, 'training/course_edit.html', {'course_form': course_form})
