@@ -59,7 +59,7 @@ def course_add(request):
     return render(request, 'training/create_course.html', {'course_form': course_form})
 
 
-# 课程修改功能
+# 课程修改功能--远泽伟
 def course_edit(request, id):
     course = Course.objects.get(id=id)
     # 该老师的所有课程
